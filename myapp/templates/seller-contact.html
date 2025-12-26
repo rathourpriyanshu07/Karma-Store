@@ -1,0 +1,101 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+  
+	</head>
+
+	<body>
+    <!-- ================= Banner Area ================= -->
+<section class="banner-area organic-breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+      <div class="col-first">
+        <h1>Contact Us</h1>
+        <nav class="d-flex align-items-center">
+          <a href="{% url 'index' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= End Banner Area ================= -->
+
+		 
+
+		
+		
+		<!-- Start Contact Form -->
+		<div class="untree_co-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="mb-4">Customer Messages</h2>
+						
+						{% if contacts %}
+						<div class="table-responsive">
+							<table class="table table-striped table-hover">
+								<thead class="table-dark">
+									<tr class="text-center">
+										<th>ID</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Message</th>
+									 
+									</tr>
+								</thead>
+								<tbody>
+									{% for contact in contacts %}
+									<tr>
+										<td class="text-center">{{ contact.id }}</td>
+										<td  class="text-center">{{ contact.fname }} {{ contact.lname }}</td>
+										<td  class="text-center">{{ contact.email }}</td>
+										<td  class="text-center">{{ contact.message|truncatewords:10 }}</td>
+										 
+									</tr>
+									
+									<!-- Modal for full message -->
+									<div class="modal fade" id="messageModal{{ contact.id }}" tabindex="-1">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Message from {{ contact.fname }} {{ contact.lname }}</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+												</div>
+												<div class="modal-body">
+													<p><strong>Name:</strong> {{ contact.fname }} {{ contact.lname }}</p>
+													<p><strong>Email:</strong> {{ contact.email }}</p>
+													<hr>
+													<p><strong>Message:</strong></p>
+													<p>{{ contact.message }}</p>
+												</div>
+											 
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						{% else %}
+						<div class="alert alert-info">
+							No contact messages yet.
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+  <!-- End Contact Form -->
+
+		
+
+		 
+	</body>
+
+</html>
+{% endblock %}
